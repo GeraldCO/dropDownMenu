@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	mode: "development",
-	entry: "./src/index.js", 
+	// ensure webpack resolves relative to this config file's directory
+	context: path.resolve(__dirname),
+	entry: path.resolve(__dirname, "src/index.js"), 
 	output: {
 		filename: "main.js",
 		path: path.resolve(__dirname, "dist"),
@@ -11,11 +13,11 @@ module.exports = {
 	},
 	devtool: "eval-source-map",
 	devServer: {
-	watchFiles: ["./src/template.html"]
+		watchFiles: [path.resolve(__dirname, "src/template.html")]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-		template: "./src/template.html",
+			template: path.resolve(__dirname, "src/template.html"),
 		}),
 	],
 	module: {
